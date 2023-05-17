@@ -699,6 +699,7 @@ let g:Lf_UseCache = 0
 "let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
 
 let g:Lf_ShortcutB = ''
+let g:Lf_ShortcutF = ''
 noremap <Leader>fk :Leaderf rg<CR>
 noremap <Leader>fe :Leaderf --nameOnly file<CR>
 noremap <Leader>fb :Leaderf! buffer<CR>
@@ -743,8 +744,8 @@ map <Leader>l <Plug>(easymotion-bd-jk)
 nmap <Leader>l <Plug>(easymotion-overwin-line)
 
 " Move to word
-map  <Leader>w <Plug>(easymotion-bd-w)
-nmap <Leader>w <Plug>(easymotion-overwin-w)
+"map  <Leader>w <Plug>(easymotion-bd-w)
+"nmap <Leader>w <Plug>(easymotion-overwin-w)
 
 " BEGIN_COC_NVIM {{{
 " References: https://github.com/neoclide/coc.nvim#example-vim-configuration
@@ -1006,6 +1007,7 @@ command! -nargs=+ AsyncTasks   :call AsyncTaskMultiple(1, <f-args>)
 "set noshowmode
 " lightline
 let g:lightline = {
+      \ 'colorscheme': 'onedark',
       \ 'active': {
       \   'left': [
       \             [ 'mode', 'paste', ],
@@ -1046,9 +1048,9 @@ endfunction
 
 " for vim-which-key:
 
-"nnoremap <silent> g :<C-u>WhichKey 'g'<CR>
-"nnoremap <silent> ,n :<C-u>WhichKey ',n'<CR>
-"nnoremap <silent> ,f :<C-u>WhichKey ',f'<CR>
+nnoremap <silent> g :<C-u>WhichKey 'g'<CR>
+nnoremap <silent> ,n :<C-u>WhichKey ',n'<CR>
+nnoremap <silent> ,f :<C-u>WhichKey ',f'<CR>
 "nnoremap <silent> <Leader> :<C-u>WhichKey '<Leader>'<CR>
 
 " Plug 'scrooloose/nerdtree'
@@ -1089,7 +1091,7 @@ Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'archibate/QFixToggle', {'on': 'QFix'}
 Plug 'tpope/vim-fugitive'        " git extension
 " "show contents of reg
-Plug 'junegunn/vim-peekaboo'
+Plug 'junegunn/vim-peekaboo' " reg plug
 "Plug 'bfrg/vim-cpp-modern', {'for': 'cpp'}
 "Plug 'vim-scripts/vim-airline'
 "Plug 'cskeeters/vim-smooth-scroll'
@@ -1097,6 +1099,8 @@ Plug 'junegunn/vim-peekaboo'
 "Plug 'vim-scripts/a.vim', {'for': ['c', 'cpp', 'cuda']}
 "Plug 'machakann/vim-swap'
 Plug 'preservim/nerdcommenter'
+" <Leader>cc comment
+" <Leader>cu uncomment
 "Plug 'preservim/vimux'
 "Plug 'peterhoeg/vim-qml', {'for': 'qml'}
 "Plug 'SirVer/ultisnips'
@@ -1139,6 +1143,8 @@ Plug 'liuchengxu/vim-which-key' " command prompt
 Plug 'derekwyatt/vim-fswitch' " switch bewteen header and src file
 "Plug 'wincent/terminus'
 
+Plug 'joshdick/onedark.vim'
+Plug 'sheerun/vim-polyglot'
 call plug#end()
 
 " my custom theme settings, you may change it:
@@ -1147,8 +1153,8 @@ call plug#end()
     "set guifont="Source Code Pro Medium 20"
 "endif
 set bg=dark
-colorscheme gruvbox
-"colorscheme industry
+"colorscheme gruvbox
+colorscheme onedark
 hi LineNrAbove guifg=#cc6666 ctermfg=red
 hi LineNrBelow guifg=#66cc66 ctermfg=green
 hi Normal ctermbg=none
