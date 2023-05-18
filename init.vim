@@ -25,7 +25,7 @@
 " H     - equivalent to ^, goto start of line, 3H for goto the 3rd char
 " L     - equivalent to $, goto end of line, 3L for the 3rd char from end
 " kj    - equivalent to <ESC>, exit insert mode
-" t     - find character over lines (vim-easymotion)
+" ,c     - find character over lines (vim-easymotion)
 "
 " <F1>  - save and switch to last used tab
 " <F2>  - save and switch to previous tab
@@ -684,9 +684,8 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "norm
 "imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " for LeaderF:
-let s:project_root = ['.root', '.svn', '.git', '.hg', '.project']
+"let s:project_root = ['.root', '.svn', '.git', '.hg', '.project']
 let g:Lf_HideHelp = 1
-"let g:Lf_WindowPosition='popup' " 悬浮显示
 let g:Lf_PreviewInPopup = 1
 let g:Lf_PreviewCode = 1
 let g:Lf_WildIgnore = {
@@ -695,30 +694,32 @@ let g:Lf_WildIgnore = {
         \}
 let g:Lf_ShowRelativePath = 0
 let g:Lf_UseCache = 0
+"let g:Lf_WindowPosition='popup' " 悬浮显示
 "let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2", 'font': "DejaVu Sans Mono for Powerline" }
 "let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
 
 let g:Lf_ShortcutB = ''
 let g:Lf_ShortcutF = ''
-noremap <Leader>fk :Leaderf rg<CR>
-noremap <Leader>fe :Leaderf --nameOnly file<CR>
-noremap <Leader>fb :Leaderf! buffer<CR>
-noremap <Leader>fm :Leaderf! mru<CR>
-noremap <Leader>ft :Leaderf! bufTag<CR>
-noremap <Leader>fl :Leaderf line<CR>
+noremap <Leader>k :Leaderf rg<CR>
+noremap <Leader>e :Leaderf --nameOnly file<CR>
+noremap <Leader>b :Leaderf buffer<CR>
+noremap <Leader>fm :Leaderf mru<CR>
+noremap <Leader>m :<C-U><C-R>=printf("Leaderf mru --input %s/", expand('%:p:h'))<CR><CR>
+"noremap <Leader>t :Leaderf! bufTag<CR>
+noremap <Leader>l :Leaderf line<CR>
 noremap <Leader>fc :Leaderf command<CR>
-noremap <Leader>ff: :Leaderf! cmdHistory<CR>
+noremap <Leader>f: :Leaderf! cmdHistory<CR>
 noremap <Leader>f/ :Leaderf! searchHistory<CR>
-noremap <Leader>fw :Leaderf! window<CR>
+noremap <Leader>w :Leaderf! window<CR>
 "noremap <Leader>fh :Leaderf! marks<CR>
-noremap <Leader>fj :Leaderf! jumps<CR>
-noremap <Leader>ff :Leaderf function<CR>
-noremap <Leader>fq :Leaderf quickfix<CR>
-noremap <Leader>fi :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s", expand("<cword>"))<CR><CR>
-noremap <Leader>fa :<C-U><C-R>=printf("Leaderf! rg -e %s", expand("<cword>"))<CR><CR>
-xnoremap <Leader>fi :<C-U><C-R>=printf("Leaderf! rg --current-buffer -F -e %s", leaderf#Rg#visual())<CR><CR>
-xnoremap <Leader>fa :<C-U><C-R>=printf("Leaderf! rg -F -e %s", leaderf#Rg#visual())<CR><CR>
-noremap <Leader>f. :<C-U>Leaderf! --recall<CR>
+noremap <Leader>j :Leaderf! jumps<CR>
+noremap <Leader>fn :Leaderf --auto-preview function<CR>
+noremap <Leader>q :Leaderf quickfix<CR>
+noremap <Leader>i :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s", expand("<cword>"))<CR><CR>
+noremap <Leader>a :<C-U><C-R>=printf("Leaderf! rg -e %s", expand("<cword>"))<CR><CR>
+xnoremap <Leader>i :<C-U><C-R>=printf("Leaderf! rg --current-buffer -F -e %s", leaderf#Rg#visual())<CR><CR>
+xnoremap <Leader>a :<C-U><C-R>=printf("Leaderf! rg -F -e %s", leaderf#Rg#visual())<CR><CR>
+noremap <Leader>. :<C-U>Leaderf! --recall<CR>
 
 " should use `Leaderf gtags --update` first
 "let g:Lf_GtagsAutoGenerate = 0.
@@ -740,8 +741,8 @@ nmap <Leader>c <Plug>(easymotion-overwin-f)
 " nmap s <Plug>(easymotion-overwin-f2)
 
 " Move to line
-map <Leader>l <Plug>(easymotion-bd-jk)
-nmap <Leader>l <Plug>(easymotion-overwin-line)
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
 
 " Move to word
 "map  <Leader>w <Plug>(easymotion-bd-w)
@@ -749,7 +750,6 @@ nmap <Leader>l <Plug>(easymotion-overwin-line)
 
 " BEGIN_COC_NVIM {{{
 " References: https://github.com/neoclide/coc.nvim#example-vim-configuration
-
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -778,6 +778,12 @@ endif
                           "\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 "inoremap <silent><expr> <space> coc#pum#visible() ? (<SID>check_back_space() ? "\<space>" : coc#pum#confirm()) : "\<space>"
 
+let g:coc_global_extensions = [
+            \ 'coc-marketplace',
+            \ 'coc-json',
+            \ 'coc-jedi'
+            \]
+
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
 nmap <silent> gl[ <Plug>(coc-diagnostic-prev)
@@ -787,9 +793,42 @@ nmap <silent> gl] <Plug>(coc-diagnostic-next)
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gD <Plug>(coc-implementation)
-nmap <silent> gy <Plug>(coc-declaration)
-nmap <silent> gY <Plug>(coc-type-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gY <Plug>(coc-declaration)
 nmap <silent> gr <Plug>(coc-references)
+
+" Symbol renaming.
+nmap gR <Plug>(coc-rename)
+
+" Formatting selected code.
+xmap gq <Plug>(coc-format-selected)
+"nmap gq <Plug>(coc-format-selected)
+nnoremap gq :Format<CR>
+
+" Restart CoC
+"nmap <silent> gt :CocRestart<CR><CR>
+
+" Applying codeAction to the selected region.
+" Example: `gaap` for current paragraph
+xmap ga  <Plug>(coc-codeaction-selected)
+nmap ga  <Plug>(coc-codeaction-selected)
+" Remap keys for applying codeAction to the current buffer.
+nmap gac <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap gaq  <Plug>(coc-fix-current)
+" Run the Code Lens action on the current line.
+nmap gal <Plug>(coc-codelens-action)
+
+" Map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -807,17 +846,6 @@ endfunction
 " Highlight the symbol and its references when holding the cursor.
 "autocmd CursorHold * silent call CocActionAsync('highlight')
 
-" Symbol renaming.
-nmap gR <Plug>(coc-rename)
-
-" Formatting selected code.
-xmap gq <Plug>(coc-format-selected)
-"nmap gq <Plug>(coc-format-selected)
-nnoremap gq :Format<CR>
-
-" Restart CoC
-"nmap <silent> gt :CocRestart<CR><CR>
-
 augroup coc_group_ts_json
 autocmd!
 " Setup formatexpr specified filetype(s).
@@ -826,29 +854,6 @@ autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
 autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
-" Applying codeAction to the selected region.
-" Example: `gaap` for current paragraph
-xmap ga  <Plug>(coc-codeaction-selected)
-nmap ga  <Plug>(coc-codeaction-selected)
-
-" Remap keys for applying codeAction to the current buffer.
-nmap gac <Plug>(coc-codeaction)
-" Apply AutoFix to problem on the current line.
-nmap gaq  <Plug>(coc-fix-current)
-
-" Run the Code Lens action on the current line.
-nmap gal <Plug>(coc-codelens-action)
-
-" Map function and class text objects
-" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-xmap if <Plug>(coc-funcobj-i)
-omap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap af <Plug>(coc-funcobj-a)
-xmap ic <Plug>(coc-classobj-i)
-omap ic <Plug>(coc-classobj-i)
-xmap ac <Plug>(coc-classobj-a)
-omap ac <Plug>(coc-classobj-a)
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
 if has('nvim-0.4.0') || has('patch-8.2.0750')
@@ -912,13 +917,13 @@ let g:floaterm_wintype = 'split'
 let g:floaterm_position = 'botright'
 let g:floaterm_height = 20
 
+let g:floaterm_keymap_toggle = '<c-t>'
+let g:floaterm_rootmarks = ['.tasks', '.git/']
 "let g:floaterm_keymap_new    = '<F1>'
 "let g:floaterm_keymap_prev   = '<F2>'
 "let g:floaterm_keymap_next   = '<F3>'
-let g:floaterm_keymap_toggle = '<c-t>'
 "let g:floaterm_autoclose     = 1
 "let g:floaterm_autoinsert    = 1
-let g:floaterm_rootmarks = ['.tasks', '.git/']
 
 "todo: input this to floaterm esc: set norelativenumber nonumber noeol nolist showbreak= signcolumn=no
 
@@ -1002,87 +1007,9 @@ command! -nargs=+ AsyncTasks   :call AsyncTaskMultiple(1, <f-args>)
 
 "noremap <silent><expr> z/ incsearch#go(<SID>incsconfig())
 
-" for lightline.vim:
 
-"set noshowmode
-" lightline
-let g:lightline = {
-      \ 'colorscheme': 'onedark',
-      \ 'active': {
-      \   'left': [
-      \             [ 'mode', 'paste', ],
-      \             [ 'readonly', 'filename', 'modified', ],
-      \             [ 'branch', 'blame', ],
-      \           ],
-      \   'right': [
-      \             [ 'lineinfo', ],
-      \             [ 'percent', ],
-      \             [ 'fileformat', 'fileencoding', 'filetype', ],
-      \            ],
-      \ },
-      \ 'tabline': {
-      \   'left': [['tabs']],
-      \   'right': [['close']],
-      \ },
-      \ 'tab': {
-      \   'active': [ 'tabnum', 'filename', 'modified', ],
-      \   'inactive': [ 'tabnum', 'filename', 'modified', ],
-      \ },
-      \ 'component_function': {
-      \   'branch': 'LightlineGitBranch',
-      \   'blame': 'LightlineGitBlame',
-      \ },
-      \ 'enable': { 'statusline': 1, 'tabline': 1, },
-      \ }
 
-function! LightlineGitBranch() abort
-  let branch = get(g:, 'coc_git_status', '')
-  return branch
-endfunction
-
-function! LightlineGitBlame() abort
-  let blame = get(b:, 'coc_git_blame', '')
-  " return blame
-  return winwidth(0) > 120 ? blame : ''
-endfunction
-
-" for vim-which-key:
-
-nnoremap <silent> g :<C-u>WhichKey 'g'<CR>
-nnoremap <silent> ,n :<C-u>WhichKey ',n'<CR>
-nnoremap <silent> ,f :<C-u>WhichKey ',f'<CR>
-"nnoremap <silent> <Leader> :<C-u>WhichKey '<Leader>'<CR>
-
-" Plug 'scrooloose/nerdtree'
-noremap ,nc :NERDTreeFocus<CR>
-nnoremap ,nn :NERDTree<CR>
-nnoremap ,nt :NERDTreeToggle<CR>
-nnoremap ,nf :NERDTreeFind<CR>
-
-let g:coc_global_extensions = [
-            \ 'coc-marketplace',
-            \ 'coc-json',
-            \ 'coc-jedi'
-            \]
 " begin plugin list
-
-" vim-cpp-enhanced-highlight
-let g:cpp_class_scope_highlight = 1
-let g:cpp_member_variable_highlight = 1
-let g:cpp_class_decl_highlight = 1
-let g:cpp_concepts_highlight = 1
-let g:cpp_no_function_highlight = 1
-
-"derekwyatt/vim-fswitch
-"switch between header and source file
-nnoremap ,h :FSHere<CR> 
-augroup mycppfiles
-  au!
-  au BufEnter *.h let b:fswitchdst  = 'cpp,cc,c'
-  au BufEnter *.cc let b:fswitchdst  = 'h'
-  au BufEnter *.c let b:fswitchdst  = 'h'
-augroup END
-
 call plug#begin()
 
 "Plug 'vim-scripts/surround.vim'
@@ -1138,25 +1065,101 @@ Plug 'xuyuanp/nerdtree-git-plugin', {'on': 'NERDTreeToggle'}
 Plug 'itchyny/lightline.vim'
 "Plug 'mkitt/tabline.vim'
 Plug 'tpope/vim-repeat'
-Plug 'easymotion/vim-easymotion'
+Plug 'easymotion/vim-easymotion' "fast move
 Plug 'liuchengxu/vim-which-key' " command prompt
 Plug 'derekwyatt/vim-fswitch' " switch bewteen header and src file
 "Plug 'wincent/terminus'
 Plug 'joshdick/onedark.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'majutsushi/tagbar' " outline plug
-Plug 'mhinz/vim-startify' " a start screen for vim
+"Plug 'mhinz/vim-startify' " a start screen for vim
 Plug 'lfv89/vim-interestingwords' " highlight current word
+"Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 call plug#end()
 
-" my custom theme settings, you may change it:
-"if has('gui_running')
-    "set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
-    "set guifont="Source Code Pro Medium 20"
-"endif
+" for markdown-preview
+"nmap <C-s> <Plug>MarkdownPreview
+"nmap <M-s> <Plug>MarkdownPreviewStop
+"nmap <C-p> <Plug>MarkdownPreviewToggle
+
+" for lightline.vim:
+"set noshowmode
+let g:lightline = {
+      \ 'colorscheme': 'onedark',
+      \ 'active': {
+      \   'left': [
+      \             [ 'mode', 'paste', ],
+      \             [ 'readonly', 'filename', 'modified', ],
+      \             [ 'branch', 'blame', ],
+      \           ],
+      \   'right': [
+      \             [ 'lineinfo', ],
+      \             [ 'percent', ],
+      \             [ 'fileformat', 'fileencoding', 'filetype', ],
+      \            ],
+      \ },
+      \ 'tabline': {
+      \   'left': [['tabs']],
+      \   'right': [['close']],
+      \ },
+      \ 'tab': {
+      \   'active': [ 'tabnum', 'filename', 'modified', ],
+      \   'inactive': [ 'tabnum', 'filename', 'modified', ],
+      \ },
+      \ 'component_function': {
+      \   'branch': 'LightlineGitBranch',
+      \   'blame': 'LightlineGitBlame',
+      \ },
+      \ 'enable': { 'statusline': 1, 'tabline': 1, },
+      \ }
+
+" vim-cpp-enhanced-highlight
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
+let g:cpp_concepts_highlight = 1
+let g:cpp_no_function_highlight = 1
+
+"derekwyatt/vim-fswitch
+"switch between header and source file
+nnoremap ,h :FSHere<CR> 
+augroup mycppfiles
+  au!
+  au BufEnter *.h let b:fswitchdst  = 'cpp,cc,c'
+  au BufEnter *.cc let b:fswitchdst  = 'h'
+  au BufEnter *.c let b:fswitchdst  = 'h'
+augroup END
+
+function! LightlineGitBranch() abort
+  let branch = get(g:, 'coc_git_status', '')
+  return branch
+endfunction
+
+function! LightlineGitBlame() abort
+  let blame = get(b:, 'coc_git_blame', '')
+  " return blame
+  return winwidth(0) > 120 ? blame : ''
+endfunction
+
+" for vim-which-key:
+" 开启了g gt会有问题
+"nnoremap <silent> g :<C-u>WhichKey 'g'<CR>
+nnoremap <silent> ,n :<C-u>WhichKey ',n'<CR>
+nnoremap <silent> ,f :<C-u>WhichKey ',f'<CR>
+"nnoremap <silent> <Leader> :<C-u>WhichKey '<Leader>'<CR>
+
+" for tagbar
+nmap <Leader>t :TagbarToggle<CR>
+
+" Plug 'scrooloose/nerdtree'
+noremap ,nc :NERDTreeFocus<CR>
+"nnoremap ,nn :NERDTree<CR>
+nnoremap ,nn :NERDTreeToggle<CR>
+nnoremap ,nf :NERDTreeFind<CR>
+
 set bg=dark
-"colorscheme gruvbox
-colorscheme onedark
+colorscheme gruvbox
+"colorscheme onedark
 hi LineNrAbove guifg=#cc6666 ctermfg=red
 hi LineNrBelow guifg=#66cc66 ctermfg=green
 hi Normal ctermbg=none
@@ -1164,9 +1167,9 @@ hi SignColumn ctermbg=none
 hi FloatermNC guifg=gray
 "set termguicolors
 
-if filereadable(".vim_localrc")
-        source .vim_localrc
-endif
+"if filereadable(".vim_localrc")
+        "source .vim_localrc
+"endif
 
 " Exit Vim if NERDTree is the only window remaining in the only tab.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
@@ -1175,4 +1178,8 @@ autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTa
 
 command VimConfig :edit ~/.vim/init.vim
 
-nmap <F8> :TagbarToggle<CR>
+" my custom theme settings, you may change it:
+"if has('gui_running')
+    "set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
+    "set guifont="Source Code Pro Medium 20"
+"endif
