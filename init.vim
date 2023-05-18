@@ -368,7 +368,7 @@ tmap <F4> <ESC><F4>
 "imap <S-F7> <ESC><S-F7>
 "tmap <S-F7> <ESC><S-F7>
 "endif
-nnoremap <silent> <F8> :wa<CR>:sh<CR><CR>
+"nnoremap <silent> <F8> :wa<CR>:sh<CR><CR>
 vmap <F8> <ESC><F8>
 imap <F8> <ESC><F8>
 tmap <F8> <ESC><F8>
@@ -1142,9 +1142,11 @@ Plug 'easymotion/vim-easymotion'
 Plug 'liuchengxu/vim-which-key' " command prompt
 Plug 'derekwyatt/vim-fswitch' " switch bewteen header and src file
 "Plug 'wincent/terminus'
-
 Plug 'joshdick/onedark.vim'
 Plug 'sheerun/vim-polyglot'
+Plug 'majutsushi/tagbar' " outline plug
+Plug 'mhinz/vim-startify' " a start screen for vim
+Plug 'lfv89/vim-interestingwords' " highlight current word
 call plug#end()
 
 " my custom theme settings, you may change it:
@@ -1172,3 +1174,5 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
 command VimConfig :edit ~/.vim/init.vim
+
+nmap <F8> :TagbarToggle<CR>
