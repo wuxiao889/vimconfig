@@ -319,6 +319,13 @@ filetype indent on
 
 let g:mapleader = ','
 
+nnoremap <silent><C-h>  <C-w>h
+nnoremap <silent><C-j>  <C-w>j
+nnoremap <silent><C-k>  <C-w>k
+nnoremap <silent><C-l>  <C-w>l
+nnoremap <silent><S-l> :bn<CR>
+nnoremap <silent><S-h> :bp<CR>
+
 nnoremap <silent> <F1> :wa<CR>:b#<CR>
 nnoremap <silent> <F2> :wa<CR>:bp<CR>
 nnoremap <silent> <F3> :wa<CR>:bn<CR>
@@ -395,6 +402,7 @@ tmap <F12> <ESC><F12>
 "nnoremap <silent> <C-k> <C-w>k:q<CR>
 "nnoremap <silent> <C-j> <C-w>j
 inoremap kj <ESC>
+inoremap jk <ESC>
 "inoremap <DEL> <ESC>
 "nnoremap <DEL> <ESC>
 "vnoremap <DEL> <ESC>
@@ -410,10 +418,10 @@ imap <C-q> <ESC><C-q>
 tmap <C-q> <ESC><C-q>
 "nnoremap Z :wa!<CR>:qa!<CR>
 "vmap Z <ESC>Z
-nnoremap <silent><expr> H (v:count == 0 ? '^' : '^^' . (v:count == 1 ? (v:count - 1) . 'l' : ''))
-nnoremap <silent><expr> L (v:count == 0 ? '$' : '^$' . (v:count == 1 ? (v:count - 1) . 'h' : ''))
-xnoremap <silent><expr> H (v:count == 0 ? '^' : '^^' . (v:count == 1 ? (v:count - 1) . 'l' : ''))
-xnoremap <silent><expr> L (v:count == 0 ? '$' : '^$' . (v:count == 1 ? (v:count - 1) . 'h' : ''))
+"nnoremap <silent><expr> H (v:count == 0 ? '^' : '^^' . (v:count == 1 ? (v:count - 1) . 'l' : ''))
+"nnoremap <silent><expr> L (v:count == 0 ? '$' : '^$' . (v:count == 1 ? (v:count - 1) . 'h' : ''))
+"xnoremap <silent><expr> H (v:count == 0 ? '^' : '^^' . (v:count == 1 ? (v:count - 1) . 'l' : ''))
+"xnoremap <silent><expr> L (v:count == 0 ? '$' : '^$' . (v:count == 1 ? (v:count - 1) . 'h' : ''))
 "nnoremap z zz
 "vnoremap z zz
 "nnoremap <CR> O<ESC>cc<ESC>j
@@ -696,24 +704,24 @@ let g:Lf_ShowRelativePath = 0
 let g:Lf_UseCache = 0
 "let g:Lf_WindowPosition='popup' " 悬浮显示
 "let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2", 'font': "DejaVu Sans Mono for Powerline" }
-"let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
+"jet g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
 
 let g:Lf_ShortcutB = ''
 let g:Lf_ShortcutF = ''
-noremap <Leader>k :Leaderf rg<CR>
+noremap <Leader>r :Leaderf rg<CR>
 noremap <Leader>e :Leaderf --nameOnly file<CR>
 noremap <Leader>b :Leaderf buffer<CR>
-noremap <Leader>fm :Leaderf mru<CR>
-noremap <Leader>m :<C-U><C-R>=printf("Leaderf mru --input %s/", expand('%:p:h'))<CR><CR>
+noremap <Leader>m :Leaderf mru<CR>
+"noremap <Leader>m :<C-U><C-R>=printf("Leaderf mru --input %s/", expand('%:p:h'))<CR><CR>
 "noremap <Leader>t :Leaderf! bufTag<CR>
 noremap <Leader>l :Leaderf line<CR>
-noremap <Leader>fc :Leaderf command<CR>
-noremap <Leader>f: :Leaderf! cmdHistory<CR>
-noremap <Leader>f/ :Leaderf! searchHistory<CR>
+noremap <Leader>c :Leaderf command<CR>
+noremap <Leader>: :Leaderf! cmdHistory<CR>
+noremap <Leader>/ :Leaderf! searchHistory<CR>
 noremap <Leader>w :Leaderf! window<CR>
 "noremap <Leader>fh :Leaderf! marks<CR>
 noremap <Leader>j :Leaderf! jumps<CR>
-noremap <Leader>fn :Leaderf --auto-preview function<CR>
+noremap <Leader>n :Leaderf --auto-preview function<CR>
 noremap <Leader>q :Leaderf quickfix<CR>
 noremap <Leader>i :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s", expand("<cword>"))<CR><CR>
 noremap <Leader>a :<C-U><C-R>=printf("Leaderf! rg -e %s", expand("<cword>"))<CR><CR>
@@ -734,8 +742,8 @@ noremap <Leader>. :<C-U>Leaderf! --recall<CR>
 let g:EasyMotion_do_mapping = 0
 
 " <Leader>c{char} to move to {char}
-map  <Leader>c <Plug>(easymotion-bd-f)
-nmap <Leader>c <Plug>(easymotion-overwin-f)
+map  s <Plug>(easymotion-bd-f)
+nmap s <Plug>(easymotion-overwin-f)
 
 " s{char}{char} to move to {char}{char}
 " nmap s <Plug>(easymotion-overwin-f2)
@@ -1066,7 +1074,7 @@ Plug 'itchyny/lightline.vim'
 "Plug 'mkitt/tabline.vim'
 Plug 'tpope/vim-repeat'
 Plug 'easymotion/vim-easymotion' "fast move
-Plug 'liuchengxu/vim-which-key' " command prompt
+"Plug 'liuchengxu/vim-which-key' " command prompt
 Plug 'derekwyatt/vim-fswitch' " switch bewteen header and src file
 "Plug 'wincent/terminus'
 Plug 'joshdick/onedark.vim'
@@ -1074,7 +1082,8 @@ Plug 'sheerun/vim-polyglot'
 Plug 'majutsushi/tagbar' " outline plug
 "Plug 'mhinz/vim-startify' " a start screen for vim
 Plug 'lfv89/vim-interestingwords' " highlight current word
-"Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+Plug 'machakann/vim-highlightedyank' "automatic highlight after yank
+"Plug 'xolox/vim-session'
 call plug#end()
 
 " for markdown-preview
@@ -1144,18 +1153,19 @@ endfunction
 " for vim-which-key:
 " 开启了g gt会有问题
 "nnoremap <silent> g :<C-u>WhichKey 'g'<CR>
-nnoremap <silent> ,n :<C-u>WhichKey ',n'<CR>
-nnoremap <silent> ,f :<C-u>WhichKey ',f'<CR>
+"nnoremap <silent> ,n :<C-u>WhichKey ',n'<CR>
+"nnoremap <silent> ,f :<C-u>WhichKey ',f'<CR>
 "nnoremap <silent> <Leader> :<C-u>WhichKey '<Leader>'<CR>
 
 " for tagbar
-nmap <Leader>t :TagbarToggle<CR>
+nmap <Space>t :TagbarToggle<CR>
 
 " Plug 'scrooloose/nerdtree'
-noremap ,nc :NERDTreeFocus<CR>
+"nnoremap <Space>c :NERDTreeFocus<CR>
+nnoremap <Space>e :NERDTreeToggle<CR>
+nnoremap <Space>f :NERDTreeFind<CR>
 "nnoremap ,nn :NERDTree<CR>
-nnoremap ,nn :NERDTreeToggle<CR>
-nnoremap ,nf :NERDTreeFind<CR>
+nnoremap <Space>h :noh<CR>
 
 set bg=dark
 colorscheme gruvbox
