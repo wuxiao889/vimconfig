@@ -323,12 +323,12 @@ nnoremap <silent><C-h>  <C-w>h
 nnoremap <silent><C-j>  <C-w>j
 nnoremap <silent><C-k>  <C-w>k
 nnoremap <silent><C-l>  <C-w>l
-nnoremap <silent><S-l> :bn<CR>
 nnoremap <silent><S-h> :bp<CR>
+nnoremap <silent><S-l> :bn<CR>
 
-nnoremap <silent> <F1> :wa<CR>:b#<CR>
-nnoremap <silent> <F2> :wa<CR>:bp<CR>
-nnoremap <silent> <F3> :wa<CR>:bn<CR>
+"nnoremap <silent> <F1> :wa<CR>:b#<CR>
+"nnoremap <silent> <F2> :wa<CR>:bp<CR>
+"nnoremap <silent> <F3> :wa<CR>:bn<CR>
 nnoremap <silent> <F4> :wa<CR>
 inoremap <silent> <F1> <ESC>
 vnoremap <silent> <F1> <ESC>
@@ -1083,13 +1083,11 @@ Plug 'majutsushi/tagbar' " outline plug
 "Plug 'mhinz/vim-startify' " a start screen for vim
 Plug 'lfv89/vim-interestingwords' " highlight current word
 Plug 'machakann/vim-highlightedyank' "automatic highlight after yank
+"Plug 'frazrepo/vim-rainbow'
 "Plug 'xolox/vim-session'
 call plug#end()
 
-" for markdown-preview
-"nmap <C-s> <Plug>MarkdownPreview
-"nmap <M-s> <Plug>MarkdownPreviewStop
-"nmap <C-p> <Plug>MarkdownPreviewToggle
+let g:rainbow_active = 1
 
 " for lightline.vim:
 "set noshowmode
