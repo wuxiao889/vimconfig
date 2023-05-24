@@ -1083,6 +1083,8 @@ Plug 'majutsushi/tagbar' " outline plug
 "Plug 'mhinz/vim-startify' " a start screen for vim
 Plug 'lfv89/vim-interestingwords' " highlight current word
 Plug 'machakann/vim-highlightedyank' "automatic highlight after yank
+Plug 'airblade/vim-gitgutter'
+Plug 'christoomey/vim-tmux-navigator'
 "Plug 'frazrepo/vim-rainbow'
 "Plug 'xolox/vim-session'
 call plug#end()
@@ -1090,14 +1092,14 @@ call plug#end()
 let g:rainbow_active = 1
 
 " for lightline.vim:
-"set noshowmode
+set noshowmode
 let g:lightline = {
-      \ 'colorscheme': 'onedark',
+      \ 'colorscheme': 'wombat',
       \ 'active': {
       \   'left': [
       \             [ 'mode', 'paste', ],
       \             [ 'readonly', 'filename', 'modified', ],
-      \             [ 'branch', 'blame', ],
+      \             [ 'gitbranch', 'blame', ],
       \           ],
       \   'right': [
       \             [ 'lineinfo', ],
@@ -1114,11 +1116,16 @@ let g:lightline = {
       \   'inactive': [ 'tabnum', 'filename', 'modified', ],
       \ },
       \ 'component_function': {
-      \   'branch': 'LightlineGitBranch',
+      \   'gitbranch': 'FugitiveHead',
+      \   'readonly' : 'LightlineReadonly',
       \   'blame': 'LightlineGitBlame',
       \ },
       \ 'enable': { 'statusline': 1, 'tabline': 1, },
       \ }
+
+function! LightlineReadonly()
+    return &readonly && &filetype !=# 'help' ? 'RO' : ''
+endfunction
 
 " vim-cpp-enhanced-highlight
 let g:cpp_class_scope_highlight = 1
@@ -1191,3 +1198,13 @@ command VimConfig :edit ~/.vim/init.vim
     "set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
     "set guifont="Source Code Pro Medium 20"
 "endif
+
+
+" for vim-gitgutter
+set updatetime=100
+" Your vimrc
+"function! GitStatus()
+  "let [a,m,r] = GitGutterGetHunkSummary()
+  "return printf('+%d ~%d -%d', a, m, r)
+"endfunction
+"set statusline+=%{GitStatus()}
