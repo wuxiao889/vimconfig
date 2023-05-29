@@ -297,15 +297,15 @@ set shortmess+=c
 "set rulerformat=%55(%{strftime('%a\ %b\ %e\ %I:%M\ %p')}\ %5l,%-6(%c%V%)\ %P%)
 "set switchbuf=usetab
 set undofile
-if has('nvim')
-  set undodir=/tmp//,.
-  set backupdir=/tmp//,.
-  set directory=/tmp//,.
-else
-  set undodir=/tmp//,.
-  set backupdir=/tmp//,.
-  set directory=/tmp//,.
-endif
+"if has('nvim')
+  "set undodir=/tmp//,.
+  "set backupdir=/tmp//,.
+  "set directory=/tmp//,.
+"else
+  "set undodir=/tmp//,.
+  "set backupdir=/tmp//,.
+  "set directory=/tmp//,.
+"endif
 
 "nnoremap w+ :resize +10<CR>
 "nnoremap w- :resize -10<CR>
@@ -1022,7 +1022,7 @@ call plug#begin()
 
 "Plug 'vim-scripts/surround.vim'
 Plug 'tpope/vim-surround'
-Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
+Plug 'scrooloose/nerdtree',
 Plug 'archibate/QFixToggle', {'on': 'QFix'}
 Plug 'tpope/vim-fugitive'        " git extension
 " "show contents of reg
@@ -1065,12 +1065,15 @@ Plug 'voldikss/vim-floaterm' " terminal manager
 "Plug 'findango/vim-mdx', {'for': 'mdx'}
 Plug 'Yggdroot/LeaderF' , { 'do': ':LeaderfInstallCExtension' }
 "Plug 'voldikss/LeaderF-floaterm'
-Plug 'liuchengxu/vista.vim', {'on': 'Vista!!'}
+"Plug 'liuchengxu/vista.vim', {'on': 'Vista!!'}
 Plug 'morhetz/gruvbox'
 Plug 'tomasr/molokai' " color scheme plug
 Plug 'xuyuanp/nerdtree-git-plugin', {'on': 'NERDTreeToggle'}
 "Plug 'thaerkh/vim-workspace'
 Plug 'itchyny/lightline.vim'
+Plug 'sinetoami/lightline-hunks'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
 "Plug 'mkitt/tabline.vim'
 Plug 'tpope/vim-repeat'
 Plug 'easymotion/vim-easymotion' "fast move
@@ -1089,7 +1092,7 @@ Plug 'christoomey/vim-tmux-navigator'
 "Plug 'xolox/vim-session'
 call plug#end()
 
-let g:rainbow_active = 1
+"let g:rainbow_active = 1
 
 " for lightline.vim:
 set noshowmode
@@ -1098,8 +1101,8 @@ let g:lightline = {
       \ 'active': {
       \   'left': [
       \             [ 'mode', 'paste', ],
+      \             [ 'hunks'],
       \             [ 'readonly', 'filename', 'modified', ],
-      \             [ 'gitbranch', 'blame', ],
       \           ],
       \   'right': [
       \             [ 'lineinfo', ],
@@ -1107,21 +1110,18 @@ let g:lightline = {
       \             [ 'fileformat', 'fileencoding', 'filetype', ],
       \            ],
       \ },
-      \ 'tabline': {
-      \   'left': [['tabs']],
-      \   'right': [['close']],
-      \ },
       \ 'tab': {
       \   'active': [ 'tabnum', 'filename', 'modified', ],
       \   'inactive': [ 'tabnum', 'filename', 'modified', ],
       \ },
       \ 'component_function': {
-      \   'gitbranch': 'FugitiveHead',
       \   'readonly' : 'LightlineReadonly',
-      \   'blame': 'LightlineGitBlame',
+      \   'hunks': 'lightline#hunks#composer',
       \ },
       \ 'enable': { 'statusline': 1, 'tabline': 1, },
       \ }
+
+let g:lightline#hunks#exclude_filetypes = [ 'startify', 'nerdtree', 'vista_kind', 'tagbar' ]
 
 function! LightlineReadonly()
     return &readonly && &filetype !=# 'help' ? 'RO' : ''
@@ -1202,9 +1202,9 @@ command VimConfig :edit ~/.vim/init.vim
 
 " for vim-gitgutter
 set updatetime=100
-" Your vimrc
-"function! GitStatus()
-  "let [a,m,r] = GitGutterGetHunkSummary()
-  "return printf('+%d ~%d -%d', a, m, r)
-"endfunction
-"set statusline+=%{GitStatus()}
+
+" for vim-airline
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#left_sep = ' '
+"let g:airline#extensions#tabline#left_alt_sep = ']'
+"let g:airline#extensions#tabline#formatter = 'unique_tail'

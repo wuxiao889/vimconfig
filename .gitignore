@@ -3,3 +3,4 @@ ripgrep
 tasks.ini
 ccls
 package.sh
+*.swp
