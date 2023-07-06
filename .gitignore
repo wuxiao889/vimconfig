@@ -4,3 +4,5 @@ tasks.ini
 ccls
 package.sh
 *.swp
+*.swo
+*.un~

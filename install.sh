@@ -1,9 +1,9 @@
 set -x
 
-mv ~/.vimrc ~/.vimrc.bak
-if [ -d ~/.vim ]; then
-  mv ~/.vim ~/.vim.bak
-fi
+cp ~/.vimrc ~/.vimrc.bak
+mv ~/.vimrc
+cp ~/.vim ~/.vim.bak -r
+mv ~/.vim
 
 echo "source ~/.vim/init.vim" > ~/.vimrc
 

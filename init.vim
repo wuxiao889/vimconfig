@@ -276,7 +276,7 @@ set incsearch
 set nocompatible
 set encoding=utf-8
 set et ts=2 sts=2 sw=2
-set ls=2 fdm=syntax fdl=100
+set ls=2  fdl=100
 set nu rnu ru
 set hls is si
 set cinoptions=j1,(0,ws,Ws,g0
@@ -1088,9 +1088,20 @@ Plug 'lfv89/vim-interestingwords' " highlight current word
 Plug 'machakann/vim-highlightedyank' "automatic highlight after yank
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'ap/vim-buftabline'
 "Plug 'frazrepo/vim-rainbow'
 "Plug 'xolox/vim-session'
 call plug#end()
+
+fun! ShowFuncName()
+  let lnum = line(".")
+  let col = col(".")
+  echohl ModeMsg
+  let str =  getline(search("^[^ \t#/]\\{2}.*[^:]\s*$", 'bW'))
+  echohl None
+  call search("\\%" . lnum . "l" . "\\%" . col . "c")
+  return str
+endfun
 
 "let g:rainbow_active = 1
 
@@ -1107,7 +1118,7 @@ let g:lightline = {
       \   'right': [
       \             [ 'lineinfo', ],
       \             [ 'percent', ],
-      \             [ 'fileformat', 'fileencoding', 'filetype', ],
+      \             [ 'func', 'fileformat', 'fileencoding', 'filetype', ],
       \            ],
       \ },
       \ 'tab': {
@@ -1117,6 +1128,7 @@ let g:lightline = {
       \ 'component_function': {
       \   'readonly' : 'LightlineReadonly',
       \   'hunks': 'lightline#hunks#composer',
+      \   'func': 'Getfuncname',
       \ },
       \ 'enable': { 'statusline': 1, 'tabline': 1, },
       \ }
@@ -1125,6 +1137,24 @@ let g:lightline#hunks#exclude_filetypes = [ 'startify', 'nerdtree', 'vista_kind'
 
 function! LightlineReadonly()
     return &readonly && &filetype !=# 'help' ? 'RO' : ''
+endfunction
+
+
+if !exists('g:lightline_tagbar#format')
+  let lightline_tagbar#format = '%s'
+endif
+
+if !exists('g:lightline_tagbar#flags')
+  let lightline_tagbar#flags = ''
+endif
+
+
+function Getfuncname() abort
+  return tagbar#currenttag(
+        \g:lightline_tagbar#format,
+        \'',
+        \g:lightline_tagbar#flags,
+        \)
 endfunction
 
 " vim-cpp-enhanced-highlight
