@@ -708,7 +708,7 @@ let g:Lf_UseCache = 0
 
 let g:Lf_ShortcutB = ''
 let g:Lf_ShortcutF = ''
-noremap <Leader>r :Leaderf rg<CR>
+noremap <Leader>r :Leaderf rg --regexMode<CR>
 noremap <Leader>e :Leaderf --nameOnly file<CR>
 noremap <Leader>b :Leaderf buffer<CR>
 noremap <Leader>m :Leaderf mru<CR>
@@ -1091,6 +1091,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'ap/vim-buftabline'
 "Plug 'frazrepo/vim-rainbow'
 "Plug 'xolox/vim-session'
+Plug 'qpkorr/vim-bufkill'
 call plug#end()
 
 fun! ShowFuncName()
@@ -1108,7 +1109,7 @@ endfun
 " for lightline.vim:
 set noshowmode
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'powerline',
       \ 'active': {
       \   'left': [
       \             [ 'mode', 'paste', ],
@@ -1145,7 +1146,7 @@ if !exists('g:lightline_tagbar#format')
 endif
 
 if !exists('g:lightline_tagbar#flags')
-  let lightline_tagbar#flags = ''
+  let lightline_tagbar#flags = 'f'
 endif
 
 
