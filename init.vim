@@ -431,36 +431,6 @@ elseif executable("pbcopy")
 vnoremap zy :w !pbcopy<CR><CR>
 endif
 
-augroup insert_curline
-autocmd InsertEnter,InsertLeave * set cul!
-augroup end
-
-"augroup archibate_abbrs
-"autocmd!
-"exec "au FileType py iabbr gc subprocess.check_call(["
-"exec "au FileType py iabbr gj os.path.join("
-"exec "au FileType cpp iabbr gi #include <"
-"exec "au FileType cpp iabbr gv std::vector<"
-"exec "au FileType cpp iabbr gs std::string"
-"exec "au FileType cpp iabbr gt std::tuple<"
-"exec "au FileType cpp iabbr ga std::array<"
-"exec "au FileType cpp iabbr gm std::map<"
-"exec "au FileType cpp iabbr gum std::unordered_map<"
-"exec "au FileType cpp iabbr gf std::function<"
-"exec "au FileType cpp iabbr gfv std::function<void()>"
-"exec "au FileType cpp iabbr gsc static_cast<"
-"exec "au FileType cpp iabbr gdc dynamic_cast<"
-"exec "au FileType cpp iabbr gspc std::static_pointer_cast<"
-"exec "au FileType cpp iabbr gdpc std::dynamic_pointer_cast<"
-"exec "au FileType cpp iabbr gms std::make_shared<"
-"exec "au FileType cpp iabbr gmu std::make_unique<"
-"exec "au FileType cpp iabbr gsp std::shared_ptr<"
-"exec "au FileType cpp iabbr gup std::unique_ptr<"
-"exec "au FileType cpp iabbr gwp std::weak_ptr<"
-"exec "au FileType cpp iabbr gnz namespace zeno {"
-"exec "au FileType cpp iabbr gnv namespace zenovis {"
-"augroup end
-
 " don't extend the stupid comments:
 autocmd FileType * setlocal formatoptions-=cro
 
@@ -469,10 +439,6 @@ autocmd SwapExists * let v:swapchoice = "e"
 
 " goto last location on open:
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-
-" open NERDTree on vim start:
-"autocmd VimEnter * NERDTree | wincmd p
-"autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
 "" 设置切换tab的快捷键 <\> + <i> 切换到第i个 tab
 "nmap <silent> g1 <Plug>AirlineSelectTab1
