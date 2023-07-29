@@ -408,23 +408,10 @@ inoremap jk <ESC>
 "vnoremap <DEL> <ESC>
 "set pastetoggle=<F1>
 
-nnoremap Q q
-vmap Q <ESC>Q
-nnoremap <silent> q :call <SID>uni_wq()<CR>
-vmap q <ESC>q
-nnoremap <silent> <C-q> :call <SID>uni_bd()<CR>
-vmap <C-q> <ESC><C-q>
-imap <C-q> <ESC><C-q>
-tmap <C-q> <ESC><C-q>
-"nnoremap Z :wa!<CR>:qa!<CR>
-"vmap Z <ESC>Z
-"nnoremap <silent><expr> H (v:count == 0 ? '^' : '^^' . (v:count == 1 ? (v:count - 1) . 'l' : ''))
-"nnoremap <silent><expr> L (v:count == 0 ? '$' : '^$' . (v:count == 1 ? (v:count - 1) . 'h' : ''))
-"xnoremap <silent><expr> H (v:count == 0 ? '^' : '^^' . (v:count == 1 ? (v:count - 1) . 'l' : ''))
-"xnoremap <silent><expr> L (v:count == 0 ? '$' : '^$' . (v:count == 1 ? (v:count - 1) . 'h' : ''))
-"nnoremap z zz
-"vnoremap z zz
-"nnoremap <CR> O<ESC>cc<ESC>j
+vmap Q <ESC>
+vmap q <ESC>
+nnoremap q <ESC>
+nnoremap Q <ESC>
 
 tnoremap <ESC> <C-\><C-n>
 if !has('nvim')
@@ -443,47 +430,6 @@ vnoremap zy :w !xsel -ib<CR><CR>
 elseif executable("pbcopy")
 vnoremap zy :w !pbcopy<CR><CR>
 endif
-
-function! s:uni_bd() abort
-let l:nr = win_getid()
-let l:wi = getwininfo(l:nr)[0]
-let l:ty = &buftype
-if l:ty == 'popup'
-FloatermKill
-elseif l:ty == 'quickfix'
-bd!
-cclose
-elseif l:wi.terminal == 1
-    if exists('b:floaterm_cmd')
-        FloatermKill
-    else
-        bd!
-    endif
-else
-    wa!
-    bd!
-endif
-endfunction
-
-function! s:uni_wq() abort
-let l:nr = win_getid()
-let l:wi = getwininfo(l:nr)[0]
-let l:ty = &buftype
-if l:ty == 'popup'
-    FloatermKill
-elseif l:ty == 'quickfix'
-    q " cclose
-elseif l:wi.terminal == 1
-    if exists('b:floaterm_cmd')
-        FloatermKill
-    else
-        q!
-    endif
-else
-    wa!
-    q!
-endif
-endfunction
 
 augroup insert_curline
 autocmd InsertEnter,InsertLeave * set cul!
@@ -666,31 +612,6 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "norm
 "endif
 "nnoremap <silent><C-p> :CtrlSpace O<CR>
 
-" no longer used fzf.vim:
-"nnoremap <silent> <space>f :Files<CR>
-"nnoremap <silent> <space>g :GFiles<CR>
-"nnoremap <silent> <space>s :GFiles?<CR>
-"nnoremap <silent> <space>b :Buffers<CR>
-"nnoremap <silent> <space>a :Ag<CR>
-"nnoremap <silent> <space>r :Rg<CR>
-"nnoremap <silent> <space>l :Lines<CR>
-"nnoremap <silent> <space>o :BLines<CR>
-"nnoremap <silent> <space>h :History<CR>
-"nnoremap <silent> <space>: :History:<CR>
-"nnoremap <silent> <space>/ :History/<CR>
-"nnoremap <silent> <space>c :Commits<CR>
-"nnoremap <silent> <space>x :Commands<CR>
-"nnoremap <silent> <space>w :Windows<CR>
-"nnoremap <silent> <space>m :Maps<CR>
-
-"nmap g<tab> <plug>(fzf-maps-n)
-"xmap g<tab> <plug>(fzf-maps-x)
-"omap g<tab> <plug>(fzf-maps-o)
-
-"imap <c-x><c-k> <plug>(fzf-complete-word)
-"imap <c-x><c-f> <plug>(fzf-complete-path)
-"imap <c-x><c-l> <plug>(fzf-complete-line)
-
 " for LeaderF:
 "let s:project_root = ['.root', '.svn', '.git', '.hg', '.project']
 let g:Lf_HideHelp = 1
@@ -862,17 +783,6 @@ autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
 autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
-
-" Remap <C-f> and <C-b> for scroll float windows/popups.
-if has('nvim-0.4.0') || has('patch-8.2.0750')
-nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-endif
-
 " Use CTRL-S for selections ranges.
 " Requires 'textDocument/selectionRange' support of language server.
 nmap <silent> <C-s> <Plug>(coc-range-select)
@@ -918,64 +828,6 @@ nnoremap <silent> glg  :<C-u>CocList --normal gstatus<CR>
 " for coc-snippets:
 
 let g:coc_snippet_next = '<tab>'
-
-" for vim-floaterm:
-
-let g:floaterm_wintype = 'split'
-let g:floaterm_position = 'botright'
-let g:floaterm_height = 20
-
-let g:floaterm_keymap_toggle = '<c-t>'
-let g:floaterm_rootmarks = ['.tasks', '.git/']
-"let g:floaterm_keymap_new    = '<F1>'
-"let g:floaterm_keymap_prev   = '<F2>'
-"let g:floaterm_keymap_next   = '<F3>'
-"let g:floaterm_autoclose     = 1
-"let g:floaterm_autoinsert    = 1
-
-"todo: input this to floaterm esc: set norelativenumber nonumber noeol nolist showbreak= signcolumn=no
-
-"function s:on_floaterm_gf() abort
-  "let f = findfile(expand('<cfile>'))
-  "if !empty(f)
-    "FloatermHide
-    "execute 'e ' . f
-  "endif
-"endfunction
-
-"augroup floaterm_gf_key
-"autocmd FileType floaterm nnoremap <silent><buffer> gf :call <SID>on_floaterm_gf()<CR>
-"augroup end
-
-" for asynctasks.vim:
-
-let g:asyncrun_open = 6
-let g:asynctasks_term_pos = 'floaterm_reuse'
-let g:asynctasks_term_rows = 6
-let g:asynctasks_term_cols = 50
-let g:asynctasks_term_reuse = 0
-let g:asynctasks_term_focus = 0
-let g:asyncrun_rootmarks = ['.tasks', '.git/']
-
-function! AsyncTaskMultiple(first, ...)
-    if len(a:000) >= 1
-        if a:first == 0
-            cclose
-        else
-            FloatermHide!
-        endif
-        let l:tmp = ""
-        for task in a:000[1:]
-            let l:tmp .= "'".l:task."',"
-        endfor
-        let l:tmp = l:tmp[:-1]
-        let g:asyncrun_exit = "if g:asyncrun_code == 0 | call AsyncTaskMultiple(0, ".l:tmp.") | else | call AsyncTaskMultiple(0) | endif"
-        exec "AsyncTask ".a:000[0]
-    else
-        let g:asyncrun_exit = ""
-    endif
-endfunction
-command! -nargs=+ AsyncTasks   :call AsyncTaskMultiple(1, <f-args>)
 
 "" for incsearch.vim
 
@@ -1061,12 +913,11 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'haya14busa/incsearch.vim'
 "Plug 'haya14busa/incsearch-fuzzy.vim'
 "Plug 'haya14busa/incsearch-easymotion.vim'
-Plug 'voldikss/vim-floaterm' " terminal manager 
 "Plug 'findango/vim-mdx', {'for': 'mdx'}
 Plug 'Yggdroot/LeaderF' , { 'do': ':LeaderfInstallCExtension' }
-"Plug 'voldikss/LeaderF-floaterm'
 "Plug 'liuchengxu/vista.vim', {'on': 'Vista!!'}
 Plug 'morhetz/gruvbox'
+Plug 'tweekmonster/startuptime.vim'
 Plug 'tomasr/molokai' " color scheme plug
 Plug 'xuyuanp/nerdtree-git-plugin', {'on': 'NERDTreeToggle'}
 "Plug 'thaerkh/vim-workspace'
@@ -1200,12 +1051,11 @@ nmap <Space>t :TagbarToggle<CR>
 "nnoremap <Space>c :NERDTreeFocus<CR>
 nnoremap <Space>e :NERDTreeToggle<CR>
 nnoremap <Space>f :NERDTreeFind<CR>
-"nnoremap ,nn :NERDTree<CR>
 nnoremap <Space>h :noh<CR>
 
 set bg=dark
 colorscheme gruvbox
-"colorscheme onedark
+"colorscheme yuejiu
 hi LineNrAbove guifg=#cc6666 ctermfg=red
 hi LineNrBelow guifg=#66cc66 ctermfg=green
 hi Normal ctermbg=none
@@ -1239,3 +1089,5 @@ set updatetime=100
 "let g:airline#extensions#tabline#left_sep = ' '
 "let g:airline#extensions#tabline#left_alt_sep = ']'
 "let g:airline#extensions#tabline#formatter = 'unique_tail'
+
+vmap X y/<C-R>"<CR>
