@@ -461,41 +461,6 @@ augroup end
 "exec "au FileType cpp iabbr gnv namespace zenovis {"
 "augroup end
 
-" no longer used vimspector:
-"nmap <S-F3> <Plug>VimspectorStop
-"nmap <S-F4> <Plug>VimspectorRestart
-"nmap <S-F5> <Plug>VimspectorContinue
-"nmap <S-F6> <Plug>VimspectorPause
-"nmap <S-F8> <Plug>VimspectorRunToCursor
-"nmap <C-S-F8> <Plug>VimspectorAddFunctionBreakpoint
-"nmap <S-F9> <Plug>VimspectorToggleBreakpoint
-"nmap <C-S-F9> <Plug>VimspectorToggleConditionalBreakpoint
-"nmap <S-F10> <Plug>VimspectorStepOver
-"nmap <S-F11> <Plug>VimspectorStepInfo
-"nmap <S-F12> <Plug>VimspectorStepOut
-"nmap <LEADER>= <Plug>VimspectorBalloonEval
-"xmap <LEADER>= <Plug>VimspectorBalloonEval
-"let g:ycm_semantic_triggers = {'VimspectorPrompt': ['.', '->', ':', '<']}
-"let g:cmake_vimspector_support = 1
-"let g:cmake_vimspector_default_configuration = {
-"\ 'adapter': 'vscode-cpptools',
-"\ 'configuration': {
-"\ 'type': '',
-"\ 'request': 'launch',
-"\ 'cwd': '${workspaceRoot}',
-"\ 'Mimode': '',
-"\ 'args': [],
-"\ 'program': '',
-"\ "setupCommands": [
-"\ {
-"\ "description": "Enable pretty-printing for gdb",
-"\ "text": "-enable-pretty-printing",
-"\ "ignoreFailures": 'true',
-"\ }
-"\ ],
-"\ }
-"\ }
-
 " don't extend the stupid comments:
 autocmd FileType * setlocal formatoptions-=cro
 
@@ -508,37 +473,6 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "norm
 " open NERDTree on vim start:
 "autocmd VimEnter * NERDTree | wincmd p
 "autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-
-" no longer used cmake4vim:
-"let g:cmake_usr_args = '-GNinja'
-"let g:cmake_build_target = 'main'
-"let g:cmake_build_type = 'Release'
-"let g:cmake_compile_commands = 1
-"let g:cmake_build_path_pattern = ["%s/build", "getcwd()"]
-
-" no longer used YouCompleteMe:
-"let g:ycm_confirm_extra_conf = 0
-"let g:ycm_error_symbol = '✗'
-"let g:ycm_warning_symbol = '⚠'
-"let g:ycm_filetype_whitelist = {"c": 1, "cpp": 1, "python": 1}
-"let g:ycm_min_num_of_chars_for_completion = 2
-"let g:ycm_show_diagnostics_ui = 1
-"let g:ycm_key_invoke_completion = '<c-z>'
-"let g:ycm_enable_diagnostic_signs = 0
-"let g:ycm_enable_diagnostic_highlighting = 1
-""let g:ycm_show_diagnostics_ui = 0
-""let g:ycm_key_list_select_completion = ['<TAB>']
-""let g:ycm_key_list_previous_completion = []
-
-" no longer used ultisnips:
-"let g:UltiSnipsExpandTrigger="<c-s>"
-"let g:UltiSnipsJumpForwardTrigger="<tab>"
-"let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-"let g:UltiSnipsEditSplit="vertical"
-
-" no longer used vim-cpp-modern:
-"let g:cpp_attributes_highlight = 1
-"let g:cpp_member_highlight = 1
 
 "" 设置切换tab的快捷键 <\> + <i> 切换到第i个 tab
 "nmap <silent> g1 <Plug>AirlineSelectTab1
@@ -565,34 +499,12 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "norm
 ""cabbrev a tab ball
 ""autocmd BufReadPost * tab ball
 
-" no longer used vim-terminal-help:
-
-"let g:terminal_key = '<c-=>'
-"let g:terminal_default_mapping = 1
-
 "inoremap ÏF <ESC>A
 "inoremap ÏH <ESC>I
 "nnoremap ÏH ^
 "nnoremap ÏF $
 "vnoremap ÏH ^
 "vnoremap ÏF $
-
-" no longer used YouCompleteMe:
-"nnoremap <LEADER><LEADER> :YcmCompleter GoTo<CR>
-"nnoremap <LEADER>[ :YcmCompleter GoToDefinitionElseDeclaration<CR>
-"nnoremap <LEADER>d :YcmCompleter GetDoc<CR>
-"nnoremap <LEADER>r :YcmCompleter RefactorRename<SPACE>
-"nnoremap <LEADER>f :YcmCompleter FixIt<CR>1
-"nnoremap <LEADER>y :call ToggleYcmDiagnostics()<CR><CR>:wa<CR>:e<CR>
-"func! ToggleYcmDiagnostics()
-"let g:ycm_show_diagnostics_ui = !g:ycm_show_diagnostics_ui
-"YcmRestartServer
-"endfunc
-
-" no longer used vim-ctrlspace:
-"if has('nvim')
-"let g:CtrlSpaceDefaultMappingKey = "<C-space> "
-"endif
 
 "let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
 "let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
@@ -632,7 +544,6 @@ noremap <Leader>c :Leaderf command<CR>
 noremap <Leader>: :Leaderf! cmdHistory<CR>
 noremap <Leader>/ :Leaderf! searchHistory<CR>
 noremap <Leader>w :Leaderf! window<CR>
-"noremap <Leader>fh :Leaderf! marks<CR>
 noremap <Leader>j :Leaderf! jumps<CR>
 noremap <Leader>n :Leaderf --auto-preview function<CR>
 noremap <Leader>q :Leaderf quickfix<CR>
@@ -864,7 +775,6 @@ let g:coc_snippet_next = '<tab>'
 " begin plugin list
 call plug#begin()
 
-"Plug 'vim-scripts/surround.vim'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdtree',
 Plug 'archibate/QFixToggle', {'on': 'QFix'}
@@ -881,29 +791,17 @@ Plug 'preservim/nerdcommenter'
 " <Leader>cu uncomment
 "Plug 'preservim/vimux'
 "Plug 'peterhoeg/vim-qml', {'for': 'qml'}
-"Plug 'SirVer/ultisnips'
 "Plug 'honza/vim-snippets'
 "Plug 'neoclide/coc-snippets'
 "Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}
-"Plug 'ilyachur/cmake4vim', {'on': ['CMake', 'CMakeBuild', 'CMakeInfo', 'CMakeRun']}
-"Plug 'puremourning/vimspector'
-"Plug 'ctrlpvim/ctrlp.vim', {'on': ['CtrlP']}
-"Plug 'ycm-core/YouCompleteMe', {'do': './install.py --clang-completer', 'for': ['c', 'cpp', 'python']}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-"Plug 'junegunn/fzf.vim'
 "Plug 'skywind3000/asynctasks.vim'
 "Plug 'skywind3000/asyncrun.vim'
-"Plug 'skywind3000/vim-terminal-help'
 "Plug 'aben20807/vim-runner'
 "Plug 'christoomey/vim-tmux-runner'
 "Plug 'viniciusgerevini/tmux-runner.vim'
-"Plug 'vim-ctrlspace/vim-ctrlspace'
-"Plug 'haya14busa/incsearch.vim'
-"Plug 'haya14busa/incsearch-fuzzy.vim'
-"Plug 'haya14busa/incsearch-easymotion.vim'
 "Plug 'findango/vim-mdx', {'for': 'mdx'}
 Plug 'Yggdroot/LeaderF' , { 'do': ':LeaderfInstallCExtension' }
 "Plug 'liuchengxu/vista.vim', {'on': 'Vista!!'}
