@@ -540,14 +540,6 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "norm
 "let g:cpp_attributes_highlight = 1
 "let g:cpp_member_highlight = 1
 
-" no longer used vim-airline:
-"let g:airline#extensions#coc#enabled = 1
-"let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#tabline#left_alt_sep = '|'
-"let g:airline#extensions#tabline#buffer_nr_show = 0
-"let g:airline#extensions#tabline#formatter = 'default'
-"let g:airline#extensions#keymap#enabled = 1
-"let g:airline#extensions#tabline#buffer_idx_mode = 1
 "" 设置切换tab的快捷键 <\> + <i> 切换到第i个 tab
 "nmap <silent> g1 <Plug>AirlineSelectTab1
 "nmap <silent> g2 <Plug>AirlineSelectTab2
@@ -880,7 +872,6 @@ Plug 'tpope/vim-fugitive'        " git extension
 " "show contents of reg
 Plug 'junegunn/vim-peekaboo' " reg plug
 "Plug 'bfrg/vim-cpp-modern', {'for': 'cpp'}
-"Plug 'vim-scripts/vim-airline'
 "Plug 'cskeeters/vim-smooth-scroll'
 "Plug 'junegunn/vim-slash'
 "Plug 'vim-scripts/a.vim', {'for': ['c', 'cpp', 'cuda']}
@@ -923,8 +914,6 @@ Plug 'xuyuanp/nerdtree-git-plugin', {'on': 'NERDTreeToggle'}
 "Plug 'thaerkh/vim-workspace'
 Plug 'itchyny/lightline.vim'
 Plug 'sinetoami/lightline-hunks'
-"Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
 "Plug 'mkitt/tabline.vim'
 Plug 'tpope/vim-repeat'
 Plug 'easymotion/vim-easymotion' "fast move
@@ -1084,10 +1073,5 @@ command VimConfig :edit ~/.vim/init.vim
 " for vim-gitgutter
 set updatetime=100
 
-" for vim-airline
-"let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#tabline#left_sep = ' '
-"let g:airline#extensions#tabline#left_alt_sep = ']'
-"let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 vmap X y/<C-R>"<CR>
