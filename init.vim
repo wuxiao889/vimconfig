@@ -409,8 +409,8 @@ inoremap jk <ESC>
 "set pastetoggle=<F1>
 
 vmap Q <ESC>
-vmap q <ESC>
-nnoremap q <ESC>
+"vmap q <ESC>
+"nnoremap q <ESC>
 nnoremap Q <ESC>
 
 tnoremap <ESC> <C-\><C-n>
