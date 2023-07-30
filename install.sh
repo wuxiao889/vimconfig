@@ -1,9 +1,8 @@
 set -x
 
-cp ~/.vimrc ~/.vimrc.bak
-mv ~/.vimrc
-cp ~/.vim ~/.vim.bak -r
-mv ~/.vim
+rm -rf ~/.vimrc.bak ~/.vim.bak
+mv ~/.vimrc ~/.vimrc.bak
+mv ~/.vim ~/.vim.bak
 
 echo "source ~/.vim/init.vim" > ~/.vimrc
 

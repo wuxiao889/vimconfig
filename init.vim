@@ -1072,8 +1072,6 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 " Close the tab if NERDTree is the only window remaining in it.
 autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
-command VimConfig :edit ~/.vim/init.vim
-
 " my custom theme settings, you may change it:
 "if has('gui_running')
     "set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
@@ -1091,3 +1089,10 @@ set updatetime=100
 "let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 vmap X y/<C-R>"<CR>
+
+" learn vimscript the hard way
+inoremap <c-u> <Esc>viwUea
+nnoremap <c-u> viwU
+
+:nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+:nnoremap <leader>sv :source $MYVIMRC<cr>
