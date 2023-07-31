@@ -409,8 +409,6 @@ inoremap jk <ESC>
 "set pastetoggle=<F1>
 
 vmap Q <ESC>
-vmap q <ESC>
-nnoremap q <ESC>
 nnoremap Q <ESC>
 
 tnoremap <ESC> <C-\><C-n>
@@ -642,7 +640,7 @@ noremap <Leader>/ :Leaderf! searchHistory<CR>
 noremap <Leader>w :Leaderf! window<CR>
 "noremap <Leader>fh :Leaderf! marks<CR>
 noremap <Leader>j :Leaderf! jumps<CR>
-noremap <Leader>n :Leaderf --auto-preview function<CR>
+noremap <Leader>n :Leaderf  function<CR>
 noremap <Leader>q :Leaderf quickfix<CR>
 noremap <Leader>i :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s", expand("<cword>"))<CR><CR>
 noremap <Leader>a :<C-U><C-R>=printf("Leaderf! rg -e %s", expand("<cword>"))<CR><CR>
@@ -721,6 +719,7 @@ nmap <silent> gl] <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
+nnoremap <silent> gs :vsp<Esc><Plug>(coc-definition)
 nmap <silent> gD <Plug>(coc-implementation)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gY <Plug>(coc-declaration)

@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =1
+let g:netrw_dirhist_1='/root/dev/mstore-client/test'
+let g:netrw_dirhist_0='/root/dev/mstore-client'
+let g:netrw_dirhist_9='/root/dev/mstore-client/thirdparties/protobuf'
+let g:netrw_dirhist_8='/root/dev/mstore-client/thirdparties'
+let g:netrw_dirhist_7='/root/dev/mstore-client/include/client'
+let g:netrw_dirhist_6='/root/dev/mstore/test/stabletest/stable/cases'
+let g:netrw_dirhist_5='/root/dev/mstore/thirdparties/protobuf'
+let g:netrw_dirhist_4='/root/dev/mstore-client/test/integration'
+let g:netrw_dirhist_3='/root/.vim'
+let g:netrw_dirhist_2='/root/project/mstore-client'
