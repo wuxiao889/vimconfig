@@ -409,8 +409,6 @@ inoremap jk <ESC>
 "set pastetoggle=<F1>
 
 vmap Q <ESC>
-vmap q <ESC>
-nnoremap q <ESC>
 nnoremap Q <ESC>
 
 tnoremap <ESC> <C-\><C-n>
@@ -642,7 +640,7 @@ noremap <Leader>/ :Leaderf! searchHistory<CR>
 noremap <Leader>w :Leaderf! window<CR>
 "noremap <Leader>fh :Leaderf! marks<CR>
 noremap <Leader>j :Leaderf! jumps<CR>
-noremap <Leader>n :Leaderf --auto-preview function<CR>
+noremap <Leader>n :Leaderf  function<CR>
 noremap <Leader>q :Leaderf quickfix<CR>
 noremap <Leader>i :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s", expand("<cword>"))<CR><CR>
 noremap <Leader>a :<C-U><C-R>=printf("Leaderf! rg -e %s", expand("<cword>"))<CR><CR>
@@ -721,6 +719,7 @@ nmap <silent> gl] <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
+nnoremap <silent> gs :vsp<Esc><Plug>(coc-definition)
 nmap <silent> gD <Plug>(coc-implementation)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gY <Plug>(coc-declaration)
@@ -776,11 +775,11 @@ endfunction
 "autocmd CursorHold * silent call CocActionAsync('highlight')
 
 augroup coc_group_ts_json
-autocmd!
-" Setup formatexpr specified filetype(s).
-autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-" Update signature help on jump placeholder.
-autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
 " Use CTRL-S for selections ranges.
@@ -1067,10 +1066,13 @@ hi FloatermNC guifg=gray
         "source .vim_localrc
 "endif
 
-" Exit Vim if NERDTree is the only window remaining in the only tab.
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-" Close the tab if NERDTree is the only window remaining in it.
-autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+augroup nerdtree_group
+    au!
+    " Exit Vim if NERDTree is the only window remaining in the only tab.
+    autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+    " Close the tab if NERDTree is the only window remaining in it.
+    autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+command VimConfig :edit ~/.vim/init.vim
 
 " my custom theme settings, you may change it:
 "if has('gui_running')
