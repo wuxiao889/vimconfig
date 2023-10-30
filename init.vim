@@ -1094,5 +1094,5 @@ vmap X y/<C-R>"<CR>
 inoremap <c-u> <Esc>viwUea
 nnoremap <c-u> viwU
 
-:nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+:nnoremap <leader>ev :vsplit ~/.vim/init.vim<cr>
 :nnoremap <leader>sv :source $MYVIMRC<cr>
